@@ -1,29 +1,34 @@
 name: Testing for Telnyx with WebdriverIO in Docker
 on:
   push:
-    branches: master
+    branches: fix
   pull_request:
-    branches: master
+    branches: fix
 jobs:
+  
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+   
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
         node-version: '14.x'
     - name: Install dependencies
       run: npm ci
-    - name: Create image
-      run: docker build -t wdiochrome:v1 .
-    - name: Run tests in image
-      run: docker run -it wdiochrome:v1
+    #- name: Create image
+    #  run: docker build -t wdiochrome:v1 .
+    #- name: Run tests in image
+    #  run: docker run -it wdiochrome:v1
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag wdiochrome:v1:$(date +%s)
             
     - uses: actions/checkout@v2
       if: always()
       with:
-        repository: txt2021/WebdriverIO_Telnyx
+        repository: txt2021/WDIO_Telnyx_fix
         ref:  report
         path: ./docs
     - name: Generate Allure Report
@@ -43,7 +48,7 @@ jobs:
       with:
         source-directory: 'allure-report'
         destination-github-username: 'txt2021'
-        destination-repository-name: 'WebdriverIO_Telnyx'
+        destination-repository-name: 'WDIO_Telnyx_fix'
         user-email: txt2021@gmail.com
         target-branch: fix-report
 
