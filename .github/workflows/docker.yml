@@ -27,7 +27,7 @@ jobs:
     - uses: addnab/docker-run-action@v3
       with:
         image: wdiochrome:v1
-        run: docker run -it wdiochrome:v1
+        run: npm run wdio:test:chrome
             
     - uses: actions/checkout@v2
       if: always()
