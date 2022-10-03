@@ -23,13 +23,13 @@ jobs:
     #  run: docker run -it wdiochrome:v1
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --t wdiochrome:v1 .
+      run: docker build . --file Dockerfile --tag wdiochrome:v1 .
             
     - uses: actions/checkout@v2
       if: always()
       with:
         repository: txt2021/WDIO_Telnyx_fix
-        ref:  report
+        ref:  fix-report
         path: ./docs
     - name: Generate Allure Report
       if: always()
@@ -37,7 +37,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       if: always()
       with:
-        name: report
+        name: fix-report
         path: allure-report/
         retention-days: 30
     - name: Push to repository
