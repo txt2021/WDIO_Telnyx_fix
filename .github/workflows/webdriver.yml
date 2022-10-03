@@ -16,14 +16,13 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Run all tests
-      run: npm run wdio
+      run: npm run wdio:test:chrome
     - uses: actions/checkout@v2
       if: always()
       with:
         repository: txt2021/WDIO_Telnyx_fix
         ref:  fix-report
         path: ./docs
-    
     - name: Generate Allure Report
       if: always()
       run: npm run report-generate
@@ -44,3 +43,6 @@ jobs:
         destination-repository-name: 'WDIO_Telnyx_fix'
         user-email: txt2021@gmail.com
         target-branch: fix-report
+
+
+
