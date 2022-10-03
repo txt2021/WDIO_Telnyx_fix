@@ -25,10 +25,9 @@ jobs:
         image: wdiochrome:v1
         run: |
           npm ci
-          npm run wdio:docker      
-          npm install @wdio/allure-reporter   
-          npm i allure-commandline
-          npm run report-generate   
+          npm run wdio:docker  
+    - name: Run all tests for report
+      run: npm run wdio:test:chrome   
     - uses: actions/checkout@v2
       if: always()
       with:
