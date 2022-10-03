@@ -34,7 +34,7 @@ jobs:
           path: ./docs
       - name: Generate Allure Report
         if: always()
-        run: npm run report-generate
+        run: npm allure generate allure-results --clean
       - uses: actions/upload-artifact@v2
         if: always()
         with:
