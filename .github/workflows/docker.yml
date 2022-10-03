@@ -26,6 +26,7 @@ jobs:
         run: |
           npm ci
           npm run wdio:docker            
+<<<<<<< HEAD
       - uses: actions/checkout@v2
         if: always()
         with:
@@ -52,6 +53,34 @@ jobs:
           destination-repository-name: 'WDIO_Telnyx_fix'
           user-email: txt2021@gmail.com
           target-branch: fix-report
+=======
+    - uses: actions/checkout@v2
+      if: always()
+      with:
+        repository: txt2021/WDIO_Telnyx_fix
+        ref:  fix-report
+        path: ./docs
+    - name: Generate Allure Report
+      if: always()
+      run: npm run report-generate
+    - uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: fix-report
+        path: allure-report/
+        retention-days: 30
+    - name: Push to repository
+      uses: cpina/github-action-push-to-another-repository@main
+      if: always()
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.ACTIONS_TOKEN }}
+      with:
+        source-directory: 'allure-report'
+        destination-github-username: 'txt2021'
+        destination-repository-name: 'WDIO_Telnyx_fix'
+        user-email: txt2021@gmail.com
+        target-branch: fix-report
+>>>>>>> c37070cb05c564a0e897b17e1c3231b9cc63d99b
 
 
 
