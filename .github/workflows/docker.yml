@@ -24,8 +24,9 @@ jobs:
       with:
         image: wdiochrome:v1
         run: |
+          npm install java
           npm install @wdio/selenium-standalone-service
-          npm ci
+          npm i
           npm run wdio:test:chrome
         #run: npm install @wdio/selenium-standalone-service && npm run wdio:test:chrome
             
