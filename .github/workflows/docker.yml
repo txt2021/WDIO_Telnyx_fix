@@ -23,7 +23,7 @@ jobs:
     #  run: docker run -it wdiochrome:v1
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wdiochrome:v1:$(date +%s)
+      run: docker build . --file Dockerfile --t wdiochrome:v1 .
             
     - uses: actions/checkout@v2
       if: always()
