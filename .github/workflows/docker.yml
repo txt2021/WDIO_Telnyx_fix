@@ -17,17 +17,17 @@ jobs:
         node-version: '14.x'
     - name: Install dependencies
       run: npm ci
-    #- name: Create image
-    #  run: docker build -t wdiochrome:v1 .
-    #- name: Run tests in image
-    #  run: docker run -it wdiochrome:v1
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build  -f Dockerfile -t wdiochrome:v1 .
     - uses: addnab/docker-run-action@v3
       with:
         image: wdiochrome:v1
-        run: npm run wdio:test:chrome
+        run: |
+          npm install @wdio/selenium-standalone-service
+          npm ci
+          npm run wdio:test:chrome
+        #run: npm install @wdio/selenium-standalone-service && npm run wdio:test:chrome
             
     - uses: actions/checkout@v2
       if: always()
