@@ -78,3 +78,4 @@ RUN ls
 
 # ON RUNNING THE IMAGE THIS COMMAND WILL BE TRIGGERED BY DEFAULT
 ENTRYPOINT ["npm", "run", "wdio:docker"]
+ENTRYPOINT ["npm", "run", "report-generate"]
